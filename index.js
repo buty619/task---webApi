@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
+const cors = requiere("cors");
 const controller = require("./controller/control");
 
 const PORT = process.env.PORT  || 3000;
@@ -9,6 +10,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/top_dev',
 mongoose.connection.on("error", function(e) { console.error(e); });
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(cors());
 
 
 
