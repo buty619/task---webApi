@@ -8,9 +8,9 @@ const controller = require("./controller/control");
 require('dotenv').config()
 
 const PORT = process.env.PORT || 3000;
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/top_dev', { useNewUrlParser: true });
-//mongoose.connect('mongodb+srv://CristianB:cristian1991@cluster0-vjfaj.mongodb.net/taskApi?retryWrites=true', { useNewUrlParser: true });
-mongoose.connection.on("error", function (e) { console.error(e); });
+// mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/top_dev', { useNewUrlParser: true });
+// //mongoose.connect('mongodb+srv://CristianB:cristian1991@cluster0-vjfaj.mongodb.net/taskApi?retryWrites=true', { useNewUrlParser: true });
+// mongoose.connection.on("error", function (e) { console.error(e); });
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(cors({
