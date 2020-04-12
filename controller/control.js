@@ -1,7 +1,16 @@
 const app = require('express')();
 const Task = require("../model/Task");
-const SparkPost = require('sparkpost');
-const client = new SparkPost(process.env.MAILING);
+var nodemailer = require('nodemailer');
+
+require('dotenv').config()
+
+var transporter = nodemailer.createTransport({
+  service: 'hotmail',
+  auth: {
+    user: process.env.MAIL,
+    pass: process.env.PASS
+  }
+});
 
 exports.findAll = async (req, res) =>
 {
@@ -58,22 +67,42 @@ exports.delete = async (req, res) =>
 
 exports.mail = async (req, res) =>
 {
-  const params = req.params;
+  const params = req.body;
   try
   {
-    client.transmissions
-      .send({
-        content: {
-          from: 'cm-punk-619@hotmail.com',
-          subject: 'Hello, World!',
-          html:
-            "<html><body><p>My cool email.</p></body></html>"
-        },
-        recipients: [{ address: 'cm-punk-619@hotmail.com' }]
-      }).then(res.status(204).send({}))
+    try
+    {
+      var mailOptions = {
+        from: process.env.MAIL,
+        to: process.env.MAIL,
+        subject: params.Asunto.value,
+        text: "Nombre: " + params.Nombre.value +
+          " E-mail remitente: " + params["E-Mail"].value +
+          " Texto: " + params.Texto.value
+      };
+      await transporter.sendMail(mailOptions, function (error, info)
+      {
+        if (error)
+        {
+          console.log(error);
+        } else
+        {
+          console.log('Email sent: ' + info.response);
+          res.json({ status: "OK" });
+        }
+      })
+    }
+    catch (e)
+    {
+      console.log(e)
+    }
+
   }
   catch (e)
   {
-    return next(e);
+    res.status(204).send('fallo la solicitud')
   }
 }
+
+
+
