@@ -13,10 +13,7 @@ const PORT = process.env.PORT || 3000;
 // mongoose.connection.on("error", function (e) { console.error(e); });
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(cors({
-    origin: 'http://localhost:5000', //ruta desde donde se hacen las peticiones
-    credentials: true
-}));
+app.use(cors());
 app.use(bodyParser.json());
 
 app.get("/todo_items", controller.findAll);
