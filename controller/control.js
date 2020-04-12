@@ -68,6 +68,7 @@ exports.delete = async (req, res) =>
 exports.mail = async (req, res) =>
 {
   const params = req.body;
+  console.log("params", params)
   try
   {
     try
