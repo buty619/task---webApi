@@ -74,8 +74,8 @@ exports.mail = async (req, res) =>
     try
     {
       var mailOptions = {
-        from: process.env.MAIL,
-        to: process.env.MAIL,
+        from: process.env.FROMMAIL,
+        to: process.env.TOMAIL,
         subject: params.Asunto.value,
         text: "Nombre: " + params.Nombre.value +
           " E-mail remitente: " + params["E-Mail"].value +
