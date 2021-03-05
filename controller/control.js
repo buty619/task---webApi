@@ -65,10 +65,9 @@ exports.delete = async (req, res) =>
   }
 }
 
-exports.mail = async (req, res) =>
-{
+exports.mail = async (req, res) => {
   const params = req.body;
-  console.log("params", params)
+  console.log("[LOG] params from frontend.", params);
   try
   {
     try
@@ -81,27 +80,32 @@ exports.mail = async (req, res) =>
           " E-mail remitente: " + params["E-Mail"].value +
           " Texto: " + params.Texto.value
       };
-      await transporter.sendMail(mailOptions, function (error, info)
-      {
-        if (error)
-        {
-          console.log(error);
-        } else
-        {
-          console.log('Email sent: ' + info.response);
-          res.json({ status: "OK" });
+      await transporter.sendMail(mailOptions, 
+        (e, info) => {
+          if (e)
+          {
+            console.log("[LOG] error.", e);
+            res.status(400).json({ status: "fallo solicitud" });
+          } else
+          {
+            console.log("[LOG] Email sended OK.", info.response);
+            res.status(200).json({ status: "OK - Mail Sended" });
+          }
         }
-      })
+      )
+
     }
     catch (e)
     {
-      console.log(e)
+      console.log("[LOG] error.", e);
+      res.status(400).json({ status: "fallo solicitud" });
     }
 
   }
   catch (e)
   {
-    res.status(204).send('fallo la solicitud')
+    console.log("[LOG] error.", e);
+    res.status(400).json({ status: "fallo solicitud" });
   }
 }
 
