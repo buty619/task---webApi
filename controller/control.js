@@ -86,11 +86,11 @@ exports.mail = async (req, res) => {
           if (e)
           {
             console.log("[LOG] error.", e);
-            res.status(400).json({ status: "fallo solicitud", error: e });
+            res.status(400).json({ statusText: "fallo solicitud", error: e });
           } else
           {
             console.log("[LOG] Email sended OK.", info.response);
-            res.status(200).json({ status: "OK - Mail Sended" });
+            res.status(200).json({ statusText: "OK - Mail Sended" });
           }
         }
       )
@@ -99,14 +99,14 @@ exports.mail = async (req, res) => {
     catch (e)
     {
       console.log("[LOG] error.", e);
-      res.status(400).json({ status: "fallo solicitud", error: e });
+      res.status(400).json({ statusText: "fallo solicitud", error: e });
     }
 
   }
   catch (e)
   {
     console.log("[LOG] error.", e);
-    res.status(400).json({ status: "fallo solicitud", error: e });
+    res.status(400).json({ statusText: "fallo solicitud", error: e });
   }
 }
 
