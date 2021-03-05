@@ -80,6 +80,7 @@ exports.mail = async (req, res) => {
           " E-mail remitente: " + params["E-Mail"].value +
           " Texto: " + params.Texto.value
       };
+      console.log("[LOG] mail parameters.", mailOptions);
       await transporter.sendMail(mailOptions, 
         (e, info) => {
           if (e)
