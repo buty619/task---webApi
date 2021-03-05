@@ -75,10 +75,10 @@ exports.mail = async (req, res) => {
       var mailOptions = {
         from: process.env.FROMMAIL,
         to: process.env.TOMAIL,
-        subject: params.Asunto.value,
-        text: "Nombre: " + params.Nombre.value +
-          " E-mail remitente: " + params["E-Mail"].value +
-          " Texto: " + params.Texto.value
+        subject: params.asunto,
+        text: "Nombre: " + params.nombre +
+          " E-mail remitente: " + params.email +
+          " Texto: " + params.texto
       };
       console.log("[LOG] mail parameters.", mailOptions);
       await transporter.sendMail(mailOptions, 
